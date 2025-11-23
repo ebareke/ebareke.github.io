@@ -3,138 +3,624 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Eric BAREKE, PhD - CV</title>
+    <title>Dr. Eric Bareke | Quantitative Life Scientist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap');
+
+        :root {
+            --neon-cyan: #00f3ff;
+            --neon-pink: #ff00ff;
+            --neon-green: #0aff0a;
+            --dark-bg: #050b14;
+            --panel-bg: rgba(16, 24, 39, 0.85);
+            --border-color: rgba(0, 243, 255, 0.3);
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
+            background-color: var(--dark-bg);
+            color: #e2e8f0;
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
         }
 
-        h1, h2 {
-            margin-bottom: 10px;
+        /* Dashboard Grid Layout */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
         }
 
-        h2 {
-            color: #333;
+        @media (min-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: 300px 1fr 350px;
+                grid-template-rows: auto 1fr;
+            }
         }
 
-        .contact-info {
-            margin-bottom: 20px;
+        /* Glassmorphism Panels */
+        .sci-panel {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
         }
 
-        .contact-info p {
-            margin: 5px 0;
+        .sci-panel:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 25px rgba(0, 243, 255, 0.15);
         }
 
-        .expertise, .experience, .education, .software, .publications {
-            margin-bottom: 20px;
+        .panel-header {
+            background: linear-gradient(90deg, rgba(0,243,255,0.1) 0%, transparent 100%);
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        .expertise h3, .experience h3, .education h3, .software h3, .publications h3 {
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        .expertise ul, .software ul, .publications ul {
+        /* Tree Infographic Styling */
+        .timeline-tree {
+            position: relative;
             padding-left: 20px;
         }
 
-        .experience .project {
-            margin-bottom: 10px;
-            padding-left: 20px;
-            border-left: 2px solid #007bff;
+        .timeline-tree::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--neon-green), var(--neon-cyan), var(--neon-pink));
+            z-index: 0;
         }
 
-        .experience .project:hover {
-            background-color: #f4f4f4;
+        .tree-node {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 30px;
+            z-index: 1;
         }
 
-        .experience .project p {
-            margin: 5px 0;
+        .tree-node::before {
+            content: '';
+            position: absolute;
+            left: 14px;
+            top: 6px;
+            width: 14px;
+            height: 14px;
+            background: var(--dark-bg);
+            border: 2px solid var(--neon-cyan);
+            border-radius: 50%;
+            z-index: 2;
+            transition: background 0.3s;
         }
 
-        a {
-            color: #007bff;
-            text-decoration: none;
+        .tree-node:hover::before {
+            background: var(--neon-cyan);
         }
 
-        a:hover {
-            text-decoration: underline;
+        /* DNA Animation Background */
+        #canvas-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.4;
         }
+
+        /* Puzzle Styling */
+        .base-pair-btn {
+            transition: all 0.2s;
+        }
+        .base-pair-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Glitch Effect for Title */
+        .glitch {
+            position: relative;
+            color: white;
+        }
+        
+        .skill-bar-fill {
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+            height: 100%;
+            position: relative;
+        }
+        
+        .skill-bar-fill::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: #fff;
+            box-shadow: 0 0 10px #fff;
+        }
+
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Dr. Eric BAREKE, PhD</h1>
-        <div class="contact-info">
-            <p>Email: <a href="mailto:j20.xcr@pm.me">j20.xcr[at]pm.me</a></p>
-            <p>Phone (Voice mails only): <a href="">+1 (438) 558-6241 </a></p>
-        </div>
-        <div class="expertise">
-            <h2>Expertise:</h2>
-            <ul>
-                <li>Computational Biology</li>
-                <li>Scientific Programming</li>
-                <li>Machine Learning</li>
-            </ul>
-        </div>
-        <div class="experience">
-            <h2>Experience:</h2>
-            <div class="project">
-                <h3>Senior Research Associate</h3>
-                <p><strong>Majewski Lab, Human Genetics, McGill University</strong></p>
-                <p>September 2016 - Present</p>
-                <p>Key Projects: ONCOHISTONES, EPIGENETICS OF PEDIATRIC BRAIN TUMOURS, 3D EPIGENOMICS, ALTERNATIVE SPLICING</p>
+<body class="min-h-screen p-4 md:p-8">
+
+    <canvas id="canvas-bg"></canvas>
+
+    <div class="max-w-7xl mx-auto">
+        
+        <!-- Header Section -->
+        <header class="sci-panel p-6 mb-6 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-6">
+                <div class="relative w-24 h-24 rounded-full overflow-hidden border-2 border-cyan-400 shadow-[0_0_20px_rgba(0,243,255,0.4)] bg-black flex items-center justify-center">
+                    <i class="fas fa-user-astronaut text-4xl text-cyan-300"></i>
+                </div>
+                <div>
+                    <h1 class="text-4xl font-bold text-white tracking-wider glitch mb-1">DR. ERIC BAREKE</h1>
+                    <p class="text-cyan-400 font-mono text-sm md:text-base">PhD IN SCIENCES | SENIOR RESEARCH ASSOCIATE</p>
+                    <div class="flex flex-wrap gap-3 mt-3 text-sm text-gray-400">
+                        <span class="flex items-center gap-1"><i class="fas fa-envelope text-pink-500"></i> next.time[at]my.workplace</span>
+                        <span class="flex items-center gap-1"><i class="fas fa-phone text-pink-500"></i> +1 (514) NOT-TODAY</span>
+                        <span class="flex items-center gap-1"><i class="fas fa-map-marker-alt text-pink-500"></i> McGill University, QC</span>
+                    </div>
+                </div>
             </div>
-            <div class="project">
-                <h3>Postdoctoral Fellow</h3>
-                <p><strong>Majewski Lab, Human Genetics, McGill University</strong></p>
-                <p>September 2013 - August 2016</p>
-                <p>Project: Care4Rare</p>
+            <div class="flex gap-3">
+                <a href="https://scholar.google.com/citations?hl=fr&user=Esob0PkAAAAJ&view_op=list_works&sortby=pubdate" target="_blank" class="px-4 py-2 border border-cyan-500 text-cyan-400 hover:bg-cyan-500 hover:text-black transition rounded text-sm font-bold uppercase tracking-widest">
+                    <i class="fas fa-graduation-cap mr-2"></i>Scholar
+                </a>
+                <a href="https://github.com/ebareke" target="_blank" class="px-4 py-2 border border-pink-500 text-pink-400 hover:bg-pink-500 hover:text-black transition rounded text-sm font-bold uppercase tracking-widest">
+                    <i class="fab fa-github mr-2"></i>GitHub
+                </a>
             </div>
-            <div class="project">
-                <h3>Postdoctoral Fellow</h3>
-                <p><strong>Sinnett Lab, CrCHU Sainte-Justine, Université de Montréal</strong></p>
-                <p>November 2011 - August 2013</p>
-                <p>Project: QuadGT (trio-based somatic caller development)</p>
+        </header>
+
+        <!-- Main Dashboard -->
+        <div class="dashboard-grid">
+            
+            <!-- LEFT COLUMN: The Phylogeny of Career (Education Tree) -->
+            <aside class="sci-panel h-fit">
+                <div class="panel-header">
+                    <span class="text-cyan-300"><i class="fas fa-code-branch mr-2"></i>ACADEMIC PHYLOGENY</span>
+                </div>
+                <div class="p-6">
+                    <div class="timeline-tree">
+                        
+                        <!-- Current Node -->
+                        <div class="tree-node">
+                            <div class="text-xs text-cyan-400 font-mono mb-1">2016 - PRESENT</div>
+                            <h3 class="text-lg font-bold text-white">Senior Research Associate</h3>
+                            <p class="text-gray-400 text-sm">Majewski Lab, McGill University</p>
+                            <div class="mt-2 text-xs bg-cyan-900/30 text-cyan-200 p-2 rounded border-l-2 border-cyan-500">
+                                Oncohistones, 3D Epigenomics, Developmental Biology
+                            </div>
+                        </div>
+
+                        <!-- Postdoc 1 -->
+                        <div class="tree-node">
+                            <div class="text-xs text-pink-400 font-mono mb-1">2013 - 2016</div>
+                            <h3 class="text-lg font-bold text-white">Postdoctoral Fellow</h3>
+                            <p class="text-gray-400 text-sm">Majewski Lab, McGill University</p>
+                            <p class="text-xs text-gray-500 mt-1">Project: Care4Rare</p>
+                        </div>
+
+                        <!-- Postdoc 2 -->
+                        <div class="tree-node">
+                            <div class="text-xs text-pink-400 font-mono mb-1">2011 - 2013</div>
+                            <h3 class="text-lg font-bold text-white">Postdoctoral Fellow</h3>
+                            <p class="text-gray-400 text-sm">Sinnett Lab, UdeM</p>
+                            <p class="text-xs text-gray-500 mt-1">Project: QuadGT (Somatic Caller)</p>
+                        </div>
+
+                        <!-- PhD -->
+                        <div class="tree-node">
+                            <div class="text-xs text-green-400 font-mono mb-1">2007 - 2011</div>
+                            <h3 class="text-lg font-bold text-white">PhD in Sciences</h3>
+                            <p class="text-gray-400 text-sm">University of Namur, Belgium</p>
+                            <p class="text-xs text-gray-500 mt-1">Bioinformatics</p>
+                        </div>
+
+                        <!-- DEA -->
+                        <div class="tree-node">
+                            <div class="text-xs text-green-400 font-mono mb-1">2005 - 2007</div>
+                            <h3 class="text-lg font-bold text-white">DEA Bioinformatics</h3>
+                            <p class="text-gray-400 text-sm">UCL / ULB / ULg / UNamur</p>
+                            <p class="text-xs text-gray-500 mt-1">Belgium Inter-university program</p>
+                        </div>
+
+                        <!-- BSc -->
+                        <div class="tree-node">
+                            <div class="text-xs text-green-400 font-mono mb-1">1998 - 2003</div>
+                            <h3 class="text-lg font-bold text-white">BSc Computer Eng. & IT</h3>
+                            <p class="text-gray-400 text-sm">National University of Rwanda</p>
+                            <p class="text-xs text-gray-500 mt-1">College of Science and Technology</p>
+                        </div>
+
+                        <!-- Root -->
+                        <div class="tree-node">
+                            <div class="text-xs text-yellow-400 font-mono mb-1">1992 - 1998</div>
+                            <h3 class="text-lg font-bold text-white">Major: Mathematics & Physics</h3>
+                            <p class="text-gray-400 text-sm">Secondary School</p>
+                            <p class="text-xs text-gray-500 mt-1">Adventist College of Gitwe, Rwanda</p>
+                        </div>
+
+                    </div>
+                </div>
+            </aside>
+
+            <!-- CENTER COLUMN: Research & Skills -->
+            <main class="flex flex-col gap-6">
+                
+                <!-- Intro/Summary Panel -->
+                <div class="sci-panel p-6">
+                    <h2 class="text-xl font-bold text-white mb-4 border-b border-gray-700 pb-2">
+                        <i class="fas fa-terminal text-green-400 mr-2"></i>SYSTEM_SUMMARY
+                    </h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        Expert in <span class="text-cyan-300 font-bold">Computational Biology</span> and <span class="text-pink-400 font-bold">Machine Learning</span> with extensive experience in genomic data analysis. Currently focusing on research in developmental biology, pediatric brain tumors and epigenomics. A developer of specialized tools (ChIPbinner, QuadGT) combining rigid mathematical logic with biological discovery.
+                    </p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+                        <div class="bg-gray-900/50 p-3 rounded border border-gray-700 text-center">
+                            <i class="fas fa-dna text-2xl text-cyan-400 mb-2"></i>
+                            <div class="text-xs text-gray-400 uppercase">Genomics</div>
+                        </div>
+                        <div class="bg-gray-900/50 p-3 rounded border border-gray-700 text-center">
+                            <i class="fas fa-laptop-code text-2xl text-pink-400 mb-2"></i>
+                            <div class="text-xs text-gray-400 uppercase">DevOps</div>
+                        </div>
+                        <div class="bg-gray-900/50 p-3 rounded border border-gray-700 text-center">
+                            <i class="fas fa-brain text-2xl text-green-400 mb-2"></i>
+                            <div class="text-xs text-gray-400 uppercase">ML/AI</div>
+                        </div>
+                        <div class="bg-gray-900/50 p-3 rounded border border-gray-700 text-center">
+                            <i class="fas fa-chart-network text-2xl text-yellow-400 mb-2"></i>
+                            <div class="text-xs text-gray-400 uppercase">Data Viz</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills Visualization -->
+                <div class="sci-panel">
+                    <div class="panel-header">
+                        <span class="text-pink-400"><i class="fas fa-layer-group mr-2"></i>COMPETENCY_MATRIX</span>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-300">Scientific Programming (Python/R/Bash)</span>
+                                <span class="text-cyan-400">98%</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill" style="width: 98%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-300">Bioinformatics Pipelines</span>
+                                <span class="text-cyan-400">95%</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-300">Machine Learning</span>
+                                <span class="text-cyan-400">85%</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-300">Mathematics & Statistics</span>
+                                <span class="text-cyan-400">90%</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Software Developed -->
+                <div class="sci-panel">
+                    <div class="panel-header">
+                        <span class="text-green-400"><i class="fas fa-microchip mr-2"></i>SOFTWARE_ARTIFACTS</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-6">
+                        <a href="#" class="group block bg-gray-900 border border-gray-700 hover:border-green-400 p-4 rounded transition">
+                            <h3 class="text-green-400 font-bold mb-1 group-hover:text-white">ChIPbinner</h3>
+                            <p class="text-xs text-gray-400">an R package for analyzing broad histone marks.</p>
+                        </a>
+                        <a href="#" class="group block bg-gray-900 border border-gray-700 hover:border-green-400 p-4 rounded transition">
+                            <h3 class="text-green-400 font-bold mb-1 group-hover:text-white">QuadGT</h3>
+                            <p class="text-xs text-gray-400">Trio-based somatic caller using rigorous statistical modeling.</p>
+                        </a>
+                        <div class="bg-gray-900 border border-gray-700 p-4 rounded opacity-75">
+                            <h3 class="text-gray-300 font-bold mb-1">PathEXdb</h3>
+                            <p class="text-xs text-gray-400">Expression database explorer for pathway analysis.</p>
+                        </div>
+                        <div class="bg-gray-900 border border-gray-700 p-4 rounded opacity-75">
+                            <h3 class="text-gray-300 font-bold mb-1">GViz</h3>
+                            <p class="text-xs text-gray-400">Genomic data visualization utility.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thought of the Day -->
+                <div class="sci-panel">
+                    <div class="panel-header">
+                        <span class="text-purple-400"><i class="fas fa-lightbulb mr-2"></i>DAILY_QUOTE</span>
+                    </div>
+                    <div class="p-6 text-center flex flex-col items-center justify-center h-full">
+                        <i class="fas fa-quote-left text-gray-700 text-xl mb-3 self-start"></i>
+                        <p id="daily-thought" class="text-lg text-white font-light italic font-mono leading-relaxed">
+                            <!-- JS will populate this -->
+                        </p>
+                        <i class="fas fa-quote-right text-gray-700 text-xl mt-3 self-end"></i>
+                        <div id="thought-date" class="mt-4 text-xs text-cyan-400 tracking-widest uppercase opacity-60"></div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- RIGHT COLUMN: Puzzle Lab & Publications -->
+            <div class="flex flex-col gap-6">
+                
+                <!-- Puzzle Lab -->
+                <aside class="sci-panel h-fit">
+                    <div class="panel-header">
+                        <span class="text-yellow-400"><i class="fas fa-puzzle-piece mr-2"></i>PUZZLE_LAB</span>
+                    </div>
+                    
+                    <!-- Puzzle 1: Genetics -->
+                    <div class="p-4 border-b border-gray-700">
+                        <h4 class="text-sm font-bold text-pink-400 mb-2">GENETIC SEQUENCER</h4>
+                        <p class="text-xs text-gray-400 mb-3">Complete the DNA strand. Match the complementary base pair.</p>
+                        
+                        <div class="bg-black p-3 rounded border border-gray-800 mb-3 text-center font-mono text-lg tracking-widest">
+                            <span id="dna-template" class="text-cyan-400">A T G C</span>
+                        </div>
+                        
+                        <div class="grid grid-cols-4 gap-2" id="dna-controls">
+                            <button onclick="playDNA('A')" class="base-pair-btn bg-gray-800 hover:bg-red-900 text-red-400 font-bold py-2 rounded text-xs border border-red-900">A</button>
+                            <button onclick="playDNA('T')" class="base-pair-btn bg-gray-800 hover:bg-blue-900 text-blue-400 font-bold py-2 rounded text-xs border border-blue-900">T</button>
+                            <button onclick="playDNA('G')" class="base-pair-btn bg-gray-800 hover:bg-green-900 text-green-400 font-bold py-2 rounded text-xs border border-green-900">G</button>
+                            <button onclick="playDNA('C')" class="base-pair-btn bg-gray-800 hover:bg-yellow-900 text-yellow-400 font-bold py-2 rounded text-xs border border-yellow-900">C</button>
+                        </div>
+                        <div id="dna-feedback" class="text-xs text-center mt-2 h-4 text-white"></div>
+                    </div>
+
+                    <!-- Puzzle 2: Math/Logic -->
+                    <div class="p-4">
+                        <h4 class="text-sm font-bold text-yellow-400 mb-2">BINARY LOGIC</h4>
+                        <p class="text-xs text-gray-400 mb-3">Convert the decimal number to 4-bit binary.</p>
+                        
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="text-xs text-gray-500">Target:</div>
+                            <div id="binary-target" class="text-xl font-bold text-white">5</div>
+                        </div>
+
+                        <div class="flex justify-center gap-2 mb-3 font-mono">
+                            <button onclick="toggleBit(0)" id="bit-0" class="w-10 h-10 bg-gray-900 border border-cyan-500 text-cyan-400 rounded flex items-center justify-center text-lg font-bold">0</button>
+                            <button onclick="toggleBit(1)" id="bit-1" class="w-10 h-10 bg-gray-900 border border-cyan-500 text-cyan-400 rounded flex items-center justify-center text-lg font-bold">0</button>
+                            <button onclick="toggleBit(2)" id="bit-2" class="w-10 h-10 bg-gray-900 border border-cyan-500 text-cyan-400 rounded flex items-center justify-center text-lg font-bold">0</button>
+                            <button onclick="toggleBit(3)" id="bit-3" class="w-10 h-10 bg-gray-900 border border-cyan-500 text-cyan-400 rounded flex items-center justify-center text-lg font-bold">0</button>
+                        </div>
+                        
+                        <button onclick="checkBinary()" class="w-full py-1 bg-cyan-900/50 hover:bg-cyan-800 text-cyan-300 text-xs uppercase tracking-wider rounded border border-cyan-800">Compile</button>
+                        <div id="math-feedback" class="text-xs text-center mt-2 h-4 text-white"></div>
+                    </div>
+
+                    <!-- Quote -->
+                    <div class="p-4 mt-4 bg-black/30 text-xs italic text-gray-500 border-t border-gray-800">
+                        "The code of life is written in four letters, but understood through infinite logic."
+                    </div>
+                </aside>
+
+                <!-- Publications Panel -->
+                <aside class="sci-panel h-fit">
+                    <div class="panel-header">
+                        <span class="text-cyan-300"><i class="fas fa-book-medical mr-2"></i>RESEARCH_PUBLICATIONS</span>
+                    </div>
+                    <div class="p-4">
+                        <div class="p-4 bg-gray-900/50 border-l-2 border-pink-500 rounded-r hover:bg-gray-900 transition cursor-pointer group">
+                            <div class="text-xs text-gray-500 mb-2 font-mono">LATEST HIGHLIGHT</div>
+                            <p class="text-sm text-gray-200 italic leading-relaxed group-hover:text-white transition">
+                                "NSD2 inhibitors rewire chromatin to treat lung and pancreatic cancers"
+                            </p>
+                            <div class="mt-3 flex justify-between items-center">
+                                <span class="text-xs text-cyan-500 font-bold">Nature, 2025</span>
+                                <i class="fas fa-external-link-alt text-xs text-gray-600 group-hover:text-cyan-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
             </div>
-        </div>
-        <div class="education">
-            <h2>Education:</h2>
-            <p><strong>PhD in Sciences (Bioinformatics)</strong></p>
-            <p>University of Namur - Belgium</p>
-            <p>September 2007 - October 2011</p>
-            <p>Supervisors: Prof. Eric Depiereux & Prof. Naji Habra</p>
-            <p><strong>Diplôme d'Études Approfondies Inter-universitaires in Bioinformatics</strong></p>
-            <p>Université Catholique de Louvain, Université Libre de Bruxelles, Université de Liège, Université de Namur - Belgium</p>
-            <p>September 2005 - August 2007</p>
-            <p>Supervisor: Prof. Eric Depiereux</p>
-        </div>
-        <div class="software">
-            <h2>Software Developed:</h2>
-            <ul>
-                <li>QuadGT</li>
-                <li>PathEXdb</li>
-                <li>GViz</li>
-                <li>Matchbox</li>
-            </ul>
-        </div>
-        <div class="publications">
-            <h2>Publications:</h2>
-            <p><a href="https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=Eric+BAREKE&btnG=" target="_blank">View publications on Google Scholar</a></p>
-            <p>ORCID: 0000-0003-3928-7160</p>
+
         </div>
     </div>
+
+    <script>
+        // --- THOUGHT OF THE DAY LOGIC ---
+        const thoughts = [
+            "Science is a way of thinking much more than it is a body of knowledge.", // Sunday
+            "The important thing is not to stop questioning. Curiosity has its own reason for existing.", // Monday
+            "Somewhere, something incredible is waiting to be known.", // Tuesday
+            "Research is seeing what everybody else has seen and thinking what nobody else has thought.", // Wednesday
+            "The good thing about science is that it's true whether or not you believe in it.", // Thursday
+            "Biology is the only science where multiplication is the same thing as division.", // Friday
+            "Data is not information, information is not knowledge, knowledge is not understanding, understanding is not wisdom." // Saturday
+        ];
+        
+        const date = new Date();
+        const dayIndex = date.getDay();
+        const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        
+        document.getElementById('daily-thought').innerText = thoughts[dayIndex];
+        document.getElementById('thought-date').innerText = `// LOG ENTRY: ${dayNames[dayIndex]}`;
+
+        // --- GENERATIVE BACKGROUND ANIMATION ---
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let particles = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 1;
+                this.color = Math.random() > 0.5 ? '#00f3ff' : '#ff00ff';
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            for (let i = 0; i < 60; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            // Draw connections
+            ctx.lineWidth = 0.5;
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                
+                for (let j = i; j < particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 100) {
+                        ctx.strokeStyle = `rgba(0, 243, 255, ${1 - distance/100})`;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        initParticles();
+        animate();
+
+
+        // --- GENETICS PUZZLE LOGIC ---
+        let currentBase = "";
+        const bases = ['A', 'T', 'C', 'G'];
+        
+        function generateDNA() {
+            currentBase = bases[Math.floor(Math.random() * bases.length)];
+            document.getElementById('dna-template').innerText = currentBase;
+            document.getElementById('dna-feedback').innerText = "Pair with: " + currentBase;
+            document.getElementById('dna-feedback').style.color = "#9ca3af";
+        }
+
+        function playDNA(selected) {
+            const pairs = { 'A': 'T', 'T': 'A', 'C': 'G', 'G': 'C' };
+            const feedback = document.getElementById('dna-feedback');
+            
+            if (pairs[currentBase] === selected) {
+                feedback.innerText = "MATCH CONFIRMED";
+                feedback.style.color = "#0aff0a"; // Green
+                setTimeout(generateDNA, 800);
+            } else {
+                feedback.innerText = "MUTATION ERROR";
+                feedback.style.color = "#ff00ff"; // Pink/Red
+            }
+        }
+        generateDNA();
+
+        // --- MATH PUZZLE LOGIC ---
+        let targetNumber = 0;
+        let bits = [0, 0, 0, 0]; // 8 4 2 1
+
+        function generateMath() {
+            targetNumber = Math.floor(Math.random() * 15) + 1;
+            document.getElementById('binary-target').innerText = targetNumber;
+            bits = [0, 0, 0, 0];
+            updateBitDisplay();
+            document.getElementById('math-feedback').innerText = "";
+        }
+
+        function toggleBit(index) {
+            bits[index] = bits[index] === 0 ? 1 : 0;
+            updateBitDisplay();
+        }
+
+        function updateBitDisplay() {
+            for(let i=0; i<4; i++) {
+                const btn = document.getElementById(`bit-${i}`);
+                btn.innerText = bits[i];
+                if(bits[i] === 1) {
+                    btn.classList.add('bg-cyan-900', 'text-white');
+                    btn.classList.remove('bg-gray-900', 'text-cyan-400');
+                } else {
+                    btn.classList.remove('bg-cyan-900', 'text-white');
+                    btn.classList.add('bg-gray-900', 'text-cyan-400');
+                }
+            }
+        }
+
+        function checkBinary() {
+            // Bits are typically 8-4-2-1 (Indices 0,1,2,3)
+            let value = (bits[0] * 8) + (bits[1] * 4) + (bits[2] * 2) + (bits[3] * 1);
+            const feedback = document.getElementById('math-feedback');
+
+            if (value === targetNumber) {
+                feedback.innerText = "ACCESS GRANTED";
+                feedback.style.color = "#0aff0a";
+                setTimeout(generateMath, 1500);
+            } else {
+                feedback.innerText = `VALUE IS ${value} - RETRY`;
+                feedback.style.color = "#ff00ff";
+            }
+        }
+        generateMath();
+
+    </script>
 </body>
 </html>
